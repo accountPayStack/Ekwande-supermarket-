@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekwande Supermarket - Secure Checkout</title>
+    <!-- Include the Paystack Inline JS SDK -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f9f9fb;
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .checkout-container {
+            background: #ffffff;
+            max-width: 420px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #eceeef;
+        }
+        .brand-header {
+            background: #ffa726; /* Matches the warm tone from image_3.png */
+            background: linear-gradient(135deg, #ffb300 0%, #f57c00 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 32px 24px;
+        }
+        .brand-header .store-name {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin: 0;
+            opacity: 0.9;
+        }
+        .brand-header .amount-display {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 10px 0 4px 0;
+            letter-spacing: -0.5px;
+        }
+        .brand-header .amount-label {
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+        .checkout-body {
+            padding: 24px;
+        }
+        .panel-title {
+            font-size: 15px;
+            color: #f57c00; /* Styled after "Our Products" in image_3.png */
+            font-weight: 700;
+            margin: 0 0 14px 0;
+            letter-spacing: 0.3px;
+        }
+        .info-card {
+            background: #fffbf4;
+            border: 1px solid #ffe0b2;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+        .info-label {
+            color: #757575;
+            font-weight: 400;
+        }
+        .info-value {
+            color: #212121;
+            font-weight: 600;
+        }
+        .payment-badge {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            border: 1px solid #eceeef;
+        }
+        .badge-text h4 {
+            margin: 0;
+            font-size: 14px;
+            color: #212121;
+            font-weight: 600;
+        }
+        .badge-text p {
+            margin: 2px 0 0 0;
+            font-size: 12px;
+            color: #757575;
+        }
+        .pay-submit-btn {
+            background-color: #f57c00; /* Perfect match to your "Buy Now" button */
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(245, 124, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+        .pay-submit-btn:hover {
+            background-color: #e65100;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(245, 124, 0, 0.3);
+        }
+        .pay-submit-btn:active {
+            transform: translateY(1px);
+        }
+        .checkout-footer {
+            text-align: center;
+            font-size: 12px;
+            color: #9e9e9e;
+            margin-top: 24px;
+            line-height: 1.5;
+        }
+        .checkout-footer a {
+            color: #f57c00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="checkout-container">
+    <!-- Premium Styled Header -->
+    <div class="brand-header">
+        <p class="store-name">Ekwande Supermarket</p>
+        <div class="amount-display">GH₵ 151.77</div>
+        <p class="amount-label">Total Amount Due</p>
+    </div>
+
+    <div class="checkout-body">
+        <!-- Order Details Card -->
+        <div class="info-card">
+            <h3 class="panel-title">Order Summary</h3>
+            <div class="info-row">
+                <span class="info-label">Customer Name</span>
+                <span class="info-value">Cobbina Arthur</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Order ID</span>
+                <span class="info-value">#EKW-77421</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Location</span>
+                <span class="info-value">Zenu, Ashaiman (GB)</span>
+            </div>
+        </div>
+
+        <!-- Secure Transaction Info -->
+        <div class="payment-badge">
+            <div class="badge-text">
+                <h4>Secure Checkout</h4>
+                <p>Mobile Money / Cards / Bank</p>
+            </div>
+            <!-- Security Lock Icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f57c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+
+        <!-- Action Trigger Button -->
+        <button class="pay-submit-btn" onclick="payWithPaystack()">Confirm & Pay</button>
+
+        <!-- Customer Support Footer -->
+        <div class="checkout-footer">
+            For customer support, contact<br>
+            <a href="mailto:alexanderasiamah363@gmail.com">alexanderasiamah363@gmail.com</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function payWithPaystack() {
+    // Basic verification check to ensure initialization is clean
+    if (typeof PaystackPop === 'undefined') {
+        alert('Paystack utility could not load. Please verify your internet connection.');
+        return;
+    }
+
+    // Your Live Public Key is loaded directly here
+    const liveKey = 'pk_live_9d00a39076d21e6a94162b4a00a095551dafdc5a'; 
+
+    const amountGHS = 151.77; 
+    const totalAmountInPesewas = Math.round(amountGHS * 100); 
+    
+    const customerEmail = "baafirahim@gmail.com"; 
+    const customerName = "Cobbina Arthur"; 
+    `customer_name`
+    const orderId = "EKW-77421"; 
+
+    let handler = PaystackPop.setup({
+        key: liveKey, 
+        email: customerEmail,
+        amount: totalAmountInPesewas,
+        currency: 'GHS', 
+        ref: orderId + '_' + Math.floor((Math.random() * 1000000) + 1), 
+        
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Customer Name",
+                    variable_name: "customer_name",
+                    value: customerName
+                },
+                {
+                    display_name: "Order ID",
+                    variable_name: "order_id",
+                    value: orderId
+                }
+            ]
+        },
+        callback: function(response){
+            alert('Thank you! Payment received successfully. Reference: ' + response.reference);
+            // Optional: Send customer back to main page after successful checkout
+            // window.location.href = "https://ekwandesupermarket.me";
+        },
+        onClose: function(){
+            alert('Checkout session closed. Payment context canceled.');
+        }
+    });
+
+    handler.openIframe();
+}
+</script>
+
+</body>
+</html>
